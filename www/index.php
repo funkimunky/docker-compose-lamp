@@ -32,7 +32,9 @@
                                 <li>PHP <?= phpversion(); ?></li>
                                 <li>
                                     <?php
-                                    $link = mysqli_connect("database", "root", $_ENV['MYSQL_ROOT_PASSWORD'], null);
+                                    $link = mysqli_connect("database", "root", "tiger", "docker",3306);
+//                                    var_dump($link);
+//                                    die();
 
 /* check connection */
                                     if (mysqli_connect_errno()) {
