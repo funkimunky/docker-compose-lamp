@@ -33,10 +33,7 @@
                                 <li>
                                     <?php
                                     $link = mysqli_connect("database", "root", "tiger", "docker",3306);
-//                                    var_dump($link);
-//                                    die();
-
-/* check connection */
+                                    /* check connection */
                                     if (mysqli_connect_errno()) {
                                         printf("MySQL connecttion failed: %s", mysqli_connect_error());
                                     } else {
