@@ -44,8 +44,8 @@ openssl && \
 #    mkdir /var/log/xdebug
 
 # Install redis
-#RUN pecl install redis-6.2.0 && \
-#    docker-php-ext-enable redis
+RUN pecl install redis-6.2.0 && \
+    docker-php-ext-enable redis
 
 # Install imagick
 RUN apt-get update && \

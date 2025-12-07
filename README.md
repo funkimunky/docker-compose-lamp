@@ -2,6 +2,8 @@
 
 ![Landing Page](https://user-images.githubusercontent.com/43859895/141092846-905eae39-0169-4fd7-911f-9ff32c48b7e8.png)
 
+open exec bash for webserver then composer require predis/predis to install predis library for the index.php to run properly 
+
 A basic LAMP stack environment built using Docker Compose. It consists of the following:
 
 - PHP
