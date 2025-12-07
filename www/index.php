@@ -32,9 +32,9 @@
                                 <li>PHP <?= phpversion(); ?></li>
                                 <li>
                                     <?php
-                                    $link = mysqli_connect("lamp-mariadb106", "root", "tiger", null,3306);
-                                    var_dump($link);
-                                    die();
+                                    $link = mysqli_connect("database", "root", "tiger", "docker",3306);
+//                                    var_dump($link);
+//                                    die();
 
 /* check connection */
                                     if (mysqli_connect_errno()) {
