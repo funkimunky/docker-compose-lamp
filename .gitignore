@@ -6,5 +6,9 @@
 /www/**
 .DS_Store
 /buildtest
+/disabled_plugins
+/www/*
 
 .idea/
+
+www/
