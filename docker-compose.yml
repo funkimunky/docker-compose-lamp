@@ -10,7 +10,7 @@ services:
       - "8081:80"
       - "8441:443"
     volumes:
-      - ${DOCUMENT_ROOT-./www}:/var/www/html:rw
+      - html_files:/var/www/html:rw
       - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
       - ${SSL_DIR-./config/ssl}:/etc/apache2/ssl/
       - ${VHOSTS_DIR-./config/vhosts}:/etc/apache2/sites-enabled
@@ -74,3 +74,10 @@ networks:
   apache-production:
     # Use a custom driver
     driver: bridge
+volumes:
+  html_files:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${DOCUMENT_ROOT-./www}
