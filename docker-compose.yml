@@ -8,7 +8,6 @@ services:
       - apache-production
     ports:
       - "8081:80"
-      - "8441:443"
     volumes:
       - html_files:/var/www/html:rw
       - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
@@ -28,6 +27,7 @@ services:
   database:
     image: mariadb:12.1.2-ubi10
     container_name: "apachemariadb"
+    restart: "always"
     networks:
       - apache-production
     ports:
@@ -42,34 +42,35 @@ services:
       MARIADB_USER: ${MARIADB_USER}
       MARIADB_PASSWORD: ${MARIADB_PASSWORD}
       MARIADB_DATABASE: ${MARIADB_DATABASE}
-  phpmyadmin:
-    image: phpmyadmin
-    container_name: "apachephpmyadmin"
-    networks:
-      - apache-production
-    environment:
-      PMA_HOST: database
-      PMA_PORT: 3306
-      PMA_USER: root
-      PMA_PASSWORD: ${MARIADB_ROOT_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
-      MYSQL_USER: ${MARIADB_USER}
-      MYSQL_PASSWORD: ${MARIADB_PASSWORD}
-      UPLOAD_LIMIT: ${UPLOAD_LIMIT}
-      MEMORY_LIMIT: ${MEMORY_LIMIT}
-    ports:
-      - "${HOST_MACHINE_PMA_PORT}:80"
-      - "${HOST_MACHINE_PMA_SECURE_PORT}:443"
-    volumes:
-      - /sessions
-      - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/conf.d/php-phpmyadmin.ini
-  redis:
-    container_name: "apacheredis"
-    image: redis:latest
-    networks:
-      - apache-production
-    ports:
-      - "${HOST_MACHINE_REDIS_PORT}:6379"
+#  phpmyadmin:
+#    image: phpmyadmin
+#    container_name: "apachephpmyadmin"
+#    networks:
+#      - apache-production
+#    environment:
+#      PMA_HOST: database
+#      PMA_PORT: 3306
+#      PMA_USER: root
+#      PMA_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+#      MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+#      MYSQL_USER: ${MARIADB_USER}
+#      MYSQL_PASSWORD: ${MARIADB_PASSWORD}
+#      UPLOAD_LIMIT: ${UPLOAD_LIMIT}
+#      MEMORY_LIMIT: ${MEMORY_LIMIT}
+#    ports:
+#      - "${HOST_MACHINE_PMA_PORT}:80"
+#      - "${HOST_MACHINE_PMA_SECURE_PORT}:443"
+#    volumes:
+#      - /sessions
+#      - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/conf.d/php-phpmyadmin.ini
+#      - ${PMA_CONFIG_USER_INC-./config/pma/config.user.inc.php}:/etc/phpmyadmin/config.user.inc.php
+#  redis:
+#    container_name: "apacheredis"
+#    image: redis:latest
+#    networks:
+#      - apache-production
+#    ports:
+#      - "${HOST_MACHINE_REDIS_PORT}:6379"
 networks:
   apache-production:
     # Use a custom driver
